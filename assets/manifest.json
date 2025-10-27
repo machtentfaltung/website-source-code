@@ -1,0 +1,9 @@
+{
+  "name": "Matei Pralea",
+  "short_name": "matei-pralea-website",
+  "id": "/index.html",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "white",
+  "theme_color": "white"
+}
