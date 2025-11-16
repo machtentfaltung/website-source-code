@@ -7,8 +7,8 @@ use crate::lang::Language;
 use eframe::egui::{self, Button, FontData, FontDefinitions, FontFamily, Id};
 
 use crate::extra_impl::extra_ctx_impl::ExtraCtxImpl;
-use serde::{Deserialize, Serialize};
 use crate::extra_impl::extra_ui_impl::ExtraUiImpl;
+use serde::{Deserialize, Serialize};
 
 #[derive(Deserialize, Serialize)]
 #[serde(default)]
@@ -125,7 +125,7 @@ impl eframe::App for Application {
         self.compact = ctx.is_compact();
 
         egui::TopBottomPanel::top("top").show(ctx, |ui| {
-            egui::menu::bar(ui, |ui| {
+            egui::MenuBar::new().ui(ui, |ui| {
                 if ui.button(self.language.about()).clicked() {
                     self.show_about_window = !self.show_about_window;
                 }
