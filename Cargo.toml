@@ -6,7 +6,7 @@ edition = "2024"
 license = "MIT OR Apache-2.0"
 
 [dependencies]
-eframe = { version = "0.31", default-features = false, features = [
+eframe = { version = "0.33", default-features = false, features = [
     "web_screen_reader",
     "default_fonts",
     "glow",
