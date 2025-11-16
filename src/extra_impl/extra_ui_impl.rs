@@ -1,11 +1,13 @@
 // Copyright © 2025 Matei Pralea <matei@machtentfaltung.de>
 // SPDX-License-Identifier: MIT OR Apache-2.0
 
+use crate::app::Application;
 use crate::lang::Language;
 use eframe::egui;
 
 pub trait ExtraUiImpl {
     fn theme_combo_box(&mut self, language: &Language);
+    fn language_combo_box(&mut self, app: &mut Application);
     fn custom_heading(&mut self, text: impl ToString);
 }
 
@@ -40,6 +42,26 @@ impl ExtraUiImpl for egui::Ui {
                 });
         });
         self.ctx().set_theme(ui_theme_preference);
+    }
+
+    fn language_combo_box(&mut self, app: &mut Application) {
+        self.vertical(|ui| {
+            ui.label(app.language.language());
+            egui::ComboBox::from_id_salt("language_combo_box")
+                .selected_text(app.language.language_name())
+                .show_ui(ui, |ui| {
+                    ui.selectable_value(
+                        &mut app.language,
+                        Language::English,
+                        Language::English.language_name(),
+                    );
+                    ui.selectable_value(
+                        &mut app.language,
+                        Language::Romanian,
+                        Language::Romanian.language_name(),
+                    );
+                });
+        });
     }
 
     fn custom_heading(&mut self, text: impl ToString) {
