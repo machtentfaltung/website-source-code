@@ -17,7 +17,7 @@ pub struct Application {
     show_about_window: bool,
     show_settings_window: bool,
     compact: bool,
-    language: Language,
+    pub language: Language,
 }
 
 impl Default for Application {
@@ -176,24 +176,8 @@ impl eframe::App for Application {
                 .min_size([400., 100.]);
             window.show(ctx, |ui| {
                 ui.horizontal(|ui| {
-                    custom_theme_buttons(self, ui);
-                    ui.vertical(|ui| {
-                        ui.label(self.language.language());
-                        egui::ComboBox::from_id_salt("language_combo_box")
-                            .selected_text(self.language.language_name())
-                            .show_ui(ui, |ui| {
-                                ui.selectable_value(
-                                    &mut self.language,
-                                    Language::English,
-                                    Language::English.language_name(),
-                                );
-                                ui.selectable_value(
-                                    &mut self.language,
-                                    Language::Romanian,
-                                    Language::Romanian.language_name(),
-                                );
-                            });
-                    })
+                    ui.theme_combo_box(&self.language);
+                    ui.language_combo_box(self);
                 });
             });
             self.show_settings_window = open;
@@ -222,43 +206,4 @@ impl eframe::App for Application {
                 });
         }
     }
-}
-
-fn custom_theme_buttons(app: &Application, ui: &mut egui::Ui) {
-    let mut theme_preference = ui.ctx().options(|opt| opt.theme_preference);
-    theme_preference_custom_buttons(&mut theme_preference, app, ui);
-    ui.ctx().set_theme(theme_preference);
-}
-
-fn theme_preference_custom_buttons(
-    theme_preference: &mut egui::ThemePreference,
-    app: &Application,
-    ui: &mut egui::Ui,
-) {
-    ui.vertical(|ui| {
-        ui.label(app.language.theme());
-        egui::ComboBox::from_id_salt("theme_combo_box")
-            .selected_text(match theme_preference {
-                egui::ThemePreference::System => app.language.system(),
-                egui::ThemePreference::Dark => app.language.dark(),
-                egui::ThemePreference::Light => app.language.light(),
-            })
-            .show_ui(ui, |ui| {
-                ui.selectable_value(
-                    theme_preference,
-                    egui::ThemePreference::System,
-                    app.language.system(),
-                );
-                ui.selectable_value(
-                    theme_preference,
-                    egui::ThemePreference::Dark,
-                    app.language.dark(),
-                );
-                ui.selectable_value(
-                    theme_preference,
-                    egui::ThemePreference::Light,
-                    app.language.light(),
-                );
-            });
-    });
 }
