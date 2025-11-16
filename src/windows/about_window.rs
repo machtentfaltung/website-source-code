@@ -18,6 +18,12 @@ pub fn about_window(app: &mut Application, ctx: &egui::Context) {
             ui.custom_heading(app.language.my_website());
             let _ = ui.link("https://machtentfaltung.de");
             ui.separator();
+
+            ui.label(egui::RichText::new(app.language.license_information()).strong());
+            ui.label("SPDX-License-Identifier: MIT OR Apache-2.0");
+
+            ui.separator();
+
             ui.hyperlink_to(
                 format!(
                     "{} {}",

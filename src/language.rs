@@ -151,6 +151,19 @@ impl Language {
         }
     }
 
+
+    pub fn license_information(&self) -> &'static str {
+        match self {
+            Language::English => {
+                "License Information"
+            }
+            Language::Romanian => {
+                "Informații de licență"
+            }
+        }
+    }
+
+
     pub fn settings(&self) -> &'static str {
         match self {
             Language::English => "Settings",
