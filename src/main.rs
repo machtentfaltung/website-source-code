@@ -4,6 +4,7 @@
 #![warn(clippy::all)]
 #[allow(unused_must_use)]
 mod app;
+mod extra_impl;
 mod lang;
 
 use app::Application;
@@ -50,4 +51,3 @@ fn main() {
         }
     });
 }
-

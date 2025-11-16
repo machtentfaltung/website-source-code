@@ -4,9 +4,11 @@
 use std::collections::BTreeMap;
 
 use crate::lang::Language;
-use eframe::egui::{self, Button, FontData, FontDefinitions, FontFamily, FontId, Id, RichText};
+use eframe::egui::{self, Button, FontData, FontDefinitions, FontFamily, Id};
 
+use crate::extra_impl::extra_ctx_impl::ExtraCtxImpl;
 use serde::{Deserialize, Serialize};
+use crate::extra_impl::extra_ui_impl::ExtraUiImpl;
 
 #[derive(Deserialize, Serialize)]
 #[serde(default)]
@@ -69,23 +71,8 @@ impl Application {
     }
 }
 
-fn custom_heading(ui: &mut egui::Ui, text: impl ToString, strong: bool) {
-    ui.add_space(3.0);
-
-    let mut text = egui::RichText::new(text.to_string()).font(FontId {
-        size: 24.0,
-        family: FontFamily::Name("Autobahn".into()),
-    });
-
-    if strong {
-        text = text.strong();
-    }
-
-    ui.heading(text);
-}
-
 fn main_window_ui(app: &mut Application, ui: &mut egui::Ui) {
-    custom_heading(ui, app.language.main_heading(), true);
+    ui.custom_heading(app.language.main_heading());
 
     ui.horizontal_wrapped(|ui| {
         ui.spacing_mut().item_spacing.x = 0.0;
@@ -135,13 +122,7 @@ impl eframe::App for Application {
     }
 
     fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
-        let screen_size = ctx.input(|i| i.content_rect());
-
-        self.compact = if screen_size.width() <= 450. {
-            true
-        } else {
-            false
-        };
+        self.compact = ctx.is_compact();
 
         egui::TopBottomPanel::top("top").show(ctx, |ui| {
             egui::menu::bar(ui, |ui| {
@@ -227,7 +208,7 @@ impl eframe::App for Application {
                 .min_size([350., 220.])
                 .open(&mut self.show_about_window)
                 .show(ctx, |ui| {
-                    custom_heading(ui, self.language.my_website(), true);
+                    ui.custom_heading(self.language.my_website());
                     ui.link("https://machtentfaltung.de");
                     ui.separator();
                     ui.hyperlink_to(
@@ -281,4 +262,3 @@ fn theme_preference_custom_buttons(
             });
     });
 }
-
