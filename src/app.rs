@@ -10,7 +10,7 @@ use serde::{Deserialize, Serialize};
 use crate::extra_impl::extra_ctx_impl::ExtraCtxImpl;
 use crate::windows::about_window::about_window;
 use crate::windows::main_window::main_window;
-use crate::windows::more_window::more_window;
+use crate::windows::more_window::{more_window, MoreWindowTab};
 use crate::windows::settings_window::settings_window;
 use crate::windows::top_panel::top_panel;
 
@@ -28,6 +28,7 @@ pub struct WindowConfiguration {
     pub show_more_window: bool,
     pub show_about_window: bool,
     pub show_settings_window: bool,
+    pub more_window_tab: MoreWindowTab,
 }
 
 impl Default for Application {

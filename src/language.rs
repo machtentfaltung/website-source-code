@@ -108,13 +108,45 @@ impl Language {
         }
     }
 
-    pub fn more_description(&self) -> &'static str {
+    pub fn more_window_programming_text(&self) -> &'static str {
         match self {
             Language::English => {
                 "I started my programming journey in 2020 with C# and .NET, building WinForms applications as a hobby. Since then, I've expanded my skills to languages like JavaScript, Python, Swift, C, and Rust, developing everything from Discord bots and iOS apps to cross-platform desktop software."
             }
             Language::Romanian => {
                 "Am început să programez în 2020 cu C# și .NET, creând aplicații WinForms inițial ca pasiune. De atunci, mi-am extins competențele către limbaje precum JavaScript, Python, Swift, C și Rust, dezvoltând de la boți pentru Discord și aplicații iOS până la software de desktop cross-platform."
+            }
+        }
+    }
+    pub fn more_window_programming_tab(&self) -> &'static str {
+        match self {
+            Language::English => {
+                "Programming"
+            }
+            Language::Romanian => {
+                "Programare"
+            }
+        }
+    }
+
+    pub fn more_window_other_interests_text(&self) -> &'static str {
+        match self {
+            Language::English => {
+                "Beyond the world of programming, I'm fascinated by thought systems and I enjoy exploring philosophical concepts and engaging in debates on religion from a secular perspective. I am also actively learning the German language and immersing myself in its remarkably rich culture."
+            }
+            Language::Romanian => {
+                "Dincolo de lumea programării, sunt fascinat de sisteme de gândire și îmi place să explorez concepte filosofice și să particip la dezbateri pe teme religioase dintr-o perspectivă laică. De asemenea, învăț activ limba germană și mă cufund în cultura sa remarcabil de bogată."
+            }
+        }
+    }
+
+    pub fn more_window_other_interests_tab(&self) -> &'static str {
+        match self {
+            Language::English => {
+                "Other Interests"
+            }
+            Language::Romanian => {
+                "Alte interese"
             }
         }
     }
