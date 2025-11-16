@@ -48,7 +48,7 @@ impl Application {
 
         fonts
             .families
-            .entry(egui::FontFamily::Proportional)
+            .entry(FontFamily::Proportional)
             .or_default()
             .insert(0, "DINish".to_owned());
 
@@ -117,10 +117,6 @@ fn main_window_ui(app: &mut Application, ui: &mut egui::Ui) {
 }
 
 impl eframe::App for Application {
-    fn save(&mut self, storage: &mut dyn eframe::Storage) {
-        eframe::set_value(storage, eframe::APP_KEY, self);
-    }
-
     fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
         self.compact = ctx.is_compact();
 
@@ -193,7 +189,7 @@ impl eframe::App for Application {
                 .open(&mut self.show_about_window)
                 .show(ctx, |ui| {
                     ui.custom_heading(self.language.my_website());
-                    ui.link("https://machtentfaltung.de");
+                    let _ = ui.link("https://machtentfaltung.de");
                     ui.separator();
                     ui.hyperlink_to(
                         format!(
@@ -205,5 +201,9 @@ impl eframe::App for Application {
                     );
                 });
         }
+    }
+
+    fn save(&mut self, storage: &mut dyn eframe::Storage) {
+        eframe::set_value(storage, eframe::APP_KEY, self);
     }
 }
