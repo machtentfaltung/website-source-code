@@ -135,7 +135,8 @@ impl eframe::App for Application {
     }
 
     fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
-        let screen_size = ctx.input(|i| i.screen_rect());
+        let screen_size = ctx.input(|i| i.content_rect());
+
         self.compact = if screen_size.width() <= 450. {
             true
         } else {
