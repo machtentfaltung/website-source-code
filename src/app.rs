@@ -141,8 +141,8 @@ impl eframe::App for Application {
                 .id(Id::new("main_window"))
                 .collapsible(false)
                 .resizable(false)
-                .fixed_size([300., 100.])
-                .min_size([300., 100.])
+                .fixed_size([300., 105.])
+                .min_size([300., 105.])
                 .show(ctx, |ui| main_window_ui(self, ui));
         }
 
@@ -152,8 +152,8 @@ impl eframe::App for Application {
                 .collapsible(false)
                 .resizable(false)
                 .open(&mut self.show_more_window)
-                .fixed_size([265., 100.])
-                .min_size([265., 100.])
+                .fixed_size([280., 100.])
+                .min_size([280., 100.])
                 .show(ctx, |ui| {
                     ui.with_layout(egui::Layout::top_down_justified(egui::Align::Min), |ui| {
                         ui.label(self.language.more_description());
