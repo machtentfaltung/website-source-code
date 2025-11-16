@@ -1,6 +1,8 @@
 // Copyright © 2025 Matei Pralea <matei@machtentfaltung.de>
 // SPDX-License-Identifier: MIT OR Apache-2.0
 
-pub mod extra_ctx_impl;
-pub mod extra_ui_impl;
-pub mod bool_ext;
+pub mod about_window;
+pub mod main_window;
+pub mod more_window;
+pub mod settings_window;
+pub mod top_panel;

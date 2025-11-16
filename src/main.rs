@@ -2,10 +2,11 @@
 // SPDX-License-Identifier: MIT OR Apache-2.0
 
 #![warn(clippy::all)]
-#[allow(unused_must_use)]
+
 mod app;
 mod extra_impl;
-mod lang;
+mod language;
+mod windows;
 
 use app::Application;
 

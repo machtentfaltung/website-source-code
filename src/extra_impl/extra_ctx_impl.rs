@@ -6,12 +6,12 @@ use eframe::egui;
 pub const COMPACT_THRESHOLD: f32 = 450.;
 
 pub trait ExtraCtxImpl {
-    fn is_compact(&self) -> bool;
+    fn toggle_compact(&self, compact: &mut bool);
 }
 
 impl ExtraCtxImpl for egui::Context {
-    fn is_compact(&self) -> bool {
+    fn toggle_compact(&self, compact: &mut bool) {
         let screen_size = self.input(|i| i.content_rect());
-        screen_size.width() <= COMPACT_THRESHOLD
+        *compact = screen_size.width() <= COMPACT_THRESHOLD;
     }
 }

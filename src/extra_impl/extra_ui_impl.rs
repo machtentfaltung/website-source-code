@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: MIT OR Apache-2.0
 
 use crate::app::Application;
-use crate::lang::Language;
+use crate::language::Language;
 use eframe::egui;
 
 pub trait ExtraUiImpl {
