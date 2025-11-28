@@ -1,11 +1,12 @@
 // Copyright © 2025 Matei Pralea <matei@pralea.me>
 // SPDX-License-Identifier: MIT OR Apache-2.0
 
-use eframe::egui;
 use serde::{Deserialize, Serialize};
+use std::collections::BTreeMap;
+use eframe::egui;
 
-use crate::language::Language;
 use crate::extra_impl::extra_ctx_impl::ExtraCtxImpl;
+use crate::language::Language;
 use crate::windows::about_window::about_window;
 use crate::windows::main_window::main_window;
 use crate::windows::more_window::{MoreWindowTab, more_window};
@@ -40,6 +41,44 @@ impl Default for Application {
 
 impl Application {
     pub fn new(cc: &eframe::CreationContext<'_>) -> Self {
+        let mut fonts = egui::FontDefinitions::default();
+
+        fonts.font_data.insert(
+            "Hind-Regular".to_owned(),
+            egui::FontData::from_static(include_bytes!("../assets/Hind-Regular.ttf")).into(),
+        );
+
+        fonts.font_data.insert(
+            "Hind-Bold".to_owned(),
+            egui::FontData::from_static(include_bytes!("../assets/Hind-Bold.ttf")).into(),
+        );
+
+        fonts
+            .families
+            .entry(egui::FontFamily::Proportional)
+            .or_default()
+            .insert(0, "Hind-Regular".to_owned());
+
+        let mut new_family = BTreeMap::new();
+
+        new_family.insert(
+            egui::FontFamily::Name("Hind-Bold".into()),
+            vec!["Hind-Bold".to_owned()],
+        );
+
+        fonts.families.append(&mut new_family);
+
+        cc.egui_ctx.set_fonts(fonts);
+
+        let mut style = (*cc.egui_ctx.style()).clone();
+
+        style.text_styles.insert(
+            egui::TextStyle::Heading,
+            egui::FontId::new(16.0, egui::FontFamily::Proportional),
+        );
+
+        cc.egui_ctx.set_style(style);
+
         if let Some(storage) = cc.storage {
             return eframe::get_value(storage, eframe::APP_KEY).unwrap_or_default();
         }

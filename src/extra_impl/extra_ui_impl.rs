@@ -68,7 +68,10 @@ impl ExtraUiImpl for egui::Ui {
         self.add_space(3.0);
 
         let text = egui::RichText::new(text.to_string())
-            .size(20.0)
+            .font(egui::FontId {
+                size: 24.0,
+                family: egui::FontFamily::Name("Hind-Bold".into()),
+            })
             .strong();
 
         self.heading(text);
