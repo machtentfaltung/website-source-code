@@ -43,19 +43,15 @@ impl Application {
     pub fn new(cc: &eframe::CreationContext<'_>) -> Self {
         let mut fonts = egui::FontDefinitions::default();
 
-        let mut regular_font =
+        let regular_font =
             egui::FontData::from_static(include_bytes!("../assets/DINish-Regular.ttf"));
-
-        // regular_font.tweak.scale = 0.9;
 
         fonts
             .font_data
             .insert("DINish-Regular".to_owned(), regular_font.into());
 
-        let mut bold_font =
+        let bold_font =
             egui::FontData::from_static(include_bytes!("../assets/DINishExpanded-Bold.ttf"));
-
-        // bold_font.tweak.scale = 0.9;
 
         fonts
             .font_data
