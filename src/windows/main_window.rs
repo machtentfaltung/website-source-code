@@ -15,8 +15,8 @@ pub fn main_window(app: &mut Application, ctx: &egui::Context) {
             .id(egui::Id::new("main_window"))
             .collapsible(false)
             .resizable(false)
-            .fixed_size([300., 125.])
-            .min_size([300., 125.])
+            .fixed_size([300., 110.])
+            .min_size([300., 110.])
             .show(ctx, |ui| main_window_ui(app, ui));
     }
 }
@@ -30,7 +30,7 @@ fn main_window_ui(app: &mut Application, ui: &mut egui::Ui) {
         ui.label(egui::RichText::new("Matei Pralea.").strong());
     });
 
-    ui.add_space(4.);
+    ui.add_space(2.);
     ui.hyperlink_to(
         format!(
             "{} github.com/mateipralea",

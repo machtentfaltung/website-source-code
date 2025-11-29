@@ -70,7 +70,7 @@ impl ExtraUiImpl for egui::Ui {
         let text = egui::RichText::new(text.to_string())
             .font(egui::FontId {
                 size: 24.0,
-                family: egui::FontFamily::Name("Hind-Bold".into()),
+                family: egui::FontFamily::Name("DINishExpanded-Bold".into()),
             })
             .strong();
 

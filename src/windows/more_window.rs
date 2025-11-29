@@ -19,8 +19,8 @@ pub fn more_window(app: &mut Application, ctx: &egui::Context) {
         .collapsible(false)
         .resizable(false)
         .open(&mut app.window_configuration.show_more_window)
-        .fixed_size([320., 100.])
-        .min_size([320., 100.])
+        .fixed_size([300., 100.])
+        .min_size([300., 100.])
         .show(ctx, |ui| {
             ui.horizontal(|ui| {
                 if ui
@@ -48,12 +48,12 @@ pub fn more_window(app: &mut Application, ctx: &egui::Context) {
 
             match app.window_configuration.more_window_tab {
                 MoreWindowTab::Programming => {
-                    ui.with_layout(egui::Layout::top_down_justified(egui::Align::Min), |ui| {
+                    ui.with_layout(egui::Layout::top_down(egui::Align::Min), |ui| {
                         ui.label(app.language.more_window_programming_text());
                     });
                 }
                 MoreWindowTab::OtherInterests => {
-                    ui.with_layout(egui::Layout::top_down_justified(egui::Align::Min), |ui| {
+                    ui.with_layout(egui::Layout::top_down(egui::Align::Min), |ui| {
                         ui.label(app.language.more_window_other_interests_text());
                     });
                 }

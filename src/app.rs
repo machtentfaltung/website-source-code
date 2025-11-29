@@ -1,9 +1,9 @@
 // Copyright © 2025 Matei Pralea <matei@pralea.me>
 // SPDX-License-Identifier: MIT OR Apache-2.0
 
+use eframe::egui;
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
-use eframe::egui;
 
 use crate::extra_impl::extra_ctx_impl::ExtraCtxImpl;
 use crate::language::Language;
@@ -43,41 +43,40 @@ impl Application {
     pub fn new(cc: &eframe::CreationContext<'_>) -> Self {
         let mut fonts = egui::FontDefinitions::default();
 
-        fonts.font_data.insert(
-            "Hind-Regular".to_owned(),
-            egui::FontData::from_static(include_bytes!("../assets/Hind-Regular.ttf")).into(),
-        );
+        let mut regular_font =
+            egui::FontData::from_static(include_bytes!("../assets/DINish-Regular.ttf"));
 
-        fonts.font_data.insert(
-            "Hind-Bold".to_owned(),
-            egui::FontData::from_static(include_bytes!("../assets/Hind-Bold.ttf")).into(),
-        );
+        // regular_font.tweak.scale = 0.9;
+
+        fonts
+            .font_data
+            .insert("DINish-Regular".to_owned(), regular_font.into());
+
+        let mut bold_font =
+            egui::FontData::from_static(include_bytes!("../assets/DINishExpanded-Bold.ttf"));
+
+        // bold_font.tweak.scale = 0.9;
+
+        fonts
+            .font_data
+            .insert("DINishExpanded-Bold".to_owned(), bold_font.into());
 
         fonts
             .families
             .entry(egui::FontFamily::Proportional)
             .or_default()
-            .insert(0, "Hind-Regular".to_owned());
+            .insert(0, "DINish-Regular".to_owned());
 
         let mut new_family = BTreeMap::new();
 
         new_family.insert(
-            egui::FontFamily::Name("Hind-Bold".into()),
-            vec!["Hind-Bold".to_owned()],
+            egui::FontFamily::Name("DINishExpanded-Bold".into()),
+            vec!["DINishExpanded-Bold".to_owned()],
         );
 
         fonts.families.append(&mut new_family);
 
         cc.egui_ctx.set_fonts(fonts);
-
-        let mut style = (*cc.egui_ctx.style()).clone();
-
-        style.text_styles.insert(
-            egui::TextStyle::Heading,
-            egui::FontId::new(16.0, egui::FontFamily::Proportional),
-        );
-
-        cc.egui_ctx.set_style(style);
 
         if let Some(storage) = cc.storage {
             return eframe::get_value(storage, eframe::APP_KEY).unwrap_or_default();
