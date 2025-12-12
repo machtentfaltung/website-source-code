@@ -44,30 +44,30 @@ impl Application {
         let mut fonts = egui::FontDefinitions::default();
 
         let regular_font =
-            egui::FontData::from_static(include_bytes!("../assets/DINish-Regular.ttf"));
+            egui::FontData::from_static(include_bytes!("../assets/DINishExpanded-Regular.ttf"));
 
         fonts
             .font_data
-            .insert("DINish-Regular".to_owned(), regular_font.into());
+            .insert("DINishExpanded-Regular".to_owned(), regular_font.into());
 
         let bold_font =
-            egui::FontData::from_static(include_bytes!("../assets/DINishExpanded-Bold.ttf"));
+            egui::FontData::from_static(include_bytes!("../assets/DINishExpanded-Black.ttf"));
 
         fonts
             .font_data
-            .insert("DINishExpanded-Bold".to_owned(), bold_font.into());
+            .insert("DINishExpanded-Black".to_owned(), bold_font.into());
 
         fonts
             .families
             .entry(egui::FontFamily::Proportional)
             .or_default()
-            .insert(0, "DINish-Regular".to_owned());
+            .insert(0, "DINishExpanded-Regular".to_owned());
 
         let mut new_family = BTreeMap::new();
 
         new_family.insert(
-            egui::FontFamily::Name("DINishExpanded-Bold".into()),
-            vec!["DINishExpanded-Bold".to_owned()],
+            egui::FontFamily::Name("DINishExpanded-Black".into()),
+            vec!["DINishExpanded-Black".to_owned()],
         );
 
         fonts.families.append(&mut new_family);
